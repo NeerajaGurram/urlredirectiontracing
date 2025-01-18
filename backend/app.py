@@ -7,10 +7,17 @@ from models.ai_model import analyze_content
 app = Flask(__name__)
 
 # Enable CORS for all routes
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://urlredirectiontracing.vercel.app"}})
+
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 @app.route('/trace', methods=['POST'])
 def trace():
+    logging.info("Received request: %s", request.json)
+
     data = request.json
     input_url = data.get('url')
 
@@ -43,5 +50,5 @@ def trace():
 
 if __name__ == '__main__':
     # Get the port from the environment variable, or default to 5000
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(debug=True, host="0.0.0.0", port=port)
