@@ -2,7 +2,7 @@
 import "./globals.css";
 import { useState } from 'react';
 import axios from 'axios';
-import ResultCard from './components/resultcard';
+import ResultCard from './components/resultcard/page';
 
 export default function Page() {
   const [displayUrl, setDisplayUrl] = useState(""); 
