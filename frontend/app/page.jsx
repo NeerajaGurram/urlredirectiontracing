@@ -11,6 +11,9 @@ export default function Page() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const backendURL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+
   const handleSubmit = async (e) => {
     setLoading(true);
     setResults(null);
@@ -18,7 +21,7 @@ export default function Page() {
     setError(null);
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/trace', { url });
+      const response = await axios.post(`${backendURL}/trace`, { url });
       console.log(response.data);
       setResults(response.data);
     } catch (err) {
