@@ -1,0 +1,28 @@
+
+
+@app.route('/trace', methods=['POST'])
+def trace():
+    data = request.json
+    input_url = data.get('url')
+
+    if not input_url:
+        return jsonify({"error": "URL is required"}), 400
+
+    # Trace the URL
+    trace_result = trace_url(input_url)
+
+    # If there's an error in tracing, return it
+    if "error" in trace_result:
+        return jsonify(trace_result)
+
+    # Analyze the content for piracy
+    title = trace_result.get("title", "")
+    description = trace_result.get("description", "")
+    analysis_result = analyze_content(title, description)
+
+    # Combine trace and analysis results
+    result = {**trace_result, **analysis_result}
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
