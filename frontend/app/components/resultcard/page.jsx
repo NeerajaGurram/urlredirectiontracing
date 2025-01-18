@@ -1,4 +1,8 @@
 export default function ResultCard({ result }) {
+  if (!result) {
+    return <div>Error: No result data available.</div>;
+  }
+
   if (result.status_code !== 200) {
     console.log(result.status_code);
     return (
