@@ -11,6 +11,7 @@ export default function Page() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  
   const backendURL =
   process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
 
